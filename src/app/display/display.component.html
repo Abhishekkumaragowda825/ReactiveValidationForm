@@ -1,0 +1,95 @@
+<div class="mt-5 mg">
+  <div class="mt-2 mg" style="align-items: center;">
+    <h1>Student Dashboard</h1>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>SL no</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Gender</th>
+        <th>Country</th>
+        <th>Message</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody class="tbody">
+      <tr *ngFor="let student of studentDetails">
+        <td>{{student.id}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.lname}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.country}}</td>
+        <td>{{student.message}}</td>
+
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+            (click)="edit(student)">Edit</button></td>
+        <td><button type="button" class="btn btn-danger" (click)="deleteStudent(student)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="modal" id="exampleModal" aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Update Student</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #updateForm="ngForm" (ngSubmit)="updateStudent()">
+        <div class="form-group">
+          <label for="rollNumber">Student Sl No :</label>
+          <input type="text" disabled #rollNumber [(ngModel)]="studentToUpdate.id" name="rollNumber" id="rollNumber"
+            class="form-control" placeholder="Student Roll number">
+        </div>
+        <div class="form-group">
+          <label for="name">First Name :</label>
+          <input type="text" #name [(ngModel)]="studentToUpdate.name" name="name" id="name" class="form-control"
+            placeholder="Student Name">
+        </div>
+        <div class="form-group">
+          <label for="address">Last Name</label>
+          <input type="text" #address [(ngModel)]="studentToUpdate.lname" name="lname" id="lname"
+            class="form-control" placeholder="Student Address">
+        </div>
+        <div class="form-group">
+          <label for="email">Email :</label>
+          <input type="text" #email [(ngModel)]="studentToUpdate.email" name="email" id="email"
+            class="form-control" placeholder="Student Email">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender :</label>
+          <input type="text" #gender [(ngModel)]="studentToUpdate.gender" name="gender" id="gender"
+            class="form-control" placeholder="Student gender">
+        </div>
+        <div class="form-group">
+          <label for="country">Country :</label>
+          <select  class="form-control" #country  (ngModel)="studentToUpdate.country" type="text" id="country" formControlName="country" selected="selected" placeholder="Select Country">
+            <option>India</option>
+            <option>Japan</option>
+            <option>France</option>
+            <option>United kingdom</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Message :</label>
+          <input type="text" #country [(ngModel)]="studentToUpdate.message" name="message" id="message"
+            class="form-control" placeholder="description">
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Update" class="btn btn-primary w-100">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>

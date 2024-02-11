@@ -1,0 +1,126 @@
+<div class="wrapper">
+  <div class="registration_form">
+      <div class="title">
+          Registration Form
+      </div>
+
+      <form [formGroup]="registrationForm" (ngSubmit)="register(registrationForm)">
+          <div class="form_wrap">
+              <div class="input_grp">
+                  <div class="input_wrap">
+                      <label for="fname">First Name</label>
+                      <input type="text" id="fname" formControlName="name" 
+                          [ngClass]="{'is-invalid':canCreate && registrationForm.controls.name.errors}" required>
+                      <div *ngIf="canCreate && registrationForm.controls.name.errors">
+                          <div *ngIf="registrationForm.controls.name.errors?.['required']" class="text-danger">
+                              Name field shouldn't be Empty!
+                          </div>
+                          <div *ngIf="registrationForm.controls.name.errors?.['pattern']" class="text-danger">
+                              Name should start with Caps!!
+                          </div>
+                          <div *ngIf="registrationForm.controls.name.errors?.['minlength']" class="text-danger">
+                              Name should have minimum of 6 chars!!
+                          </div>
+                          <div *ngIf="registrationForm.controls.name.errors?.['maxlength']" class="text-danger">
+                              Name should exceeds 10!!
+                          </div>
+                      </div>
+                  </div>
+                  <div class="input_wrap">
+                      <label for="lname">Last Name</label>
+                      <input type="text" id="lname" formControlName="lname" >
+                      <div *ngIf="canCreate && registrationForm.controls.lname.errors">
+                          <div *ngIf="registrationForm.controls.lname.errors?.['required']" class="text-danger">
+                              Last Name field shouldn't be Empty!
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="input_wrap">
+                  <label for="email" class="form-label">Email Address</label>
+                  <input type="text" id="email" name="email" formControlName="email"
+                  [ngClass]="{'is-invalid':canCreate && registrationForm.controls.email.errors}" required>
+                  <div *ngIf="canCreate && registrationForm.controls.email.errors">
+                      <div *ngIf="registrationForm.controls.email.errors?.['required']" class="text-danger">
+                          Email field shouldn't be Empty!
+                      </div>
+                      <div *ngIf="registrationForm.controls.email.errors?.['pattern']" class="text-danger">
+                          email field pattern not matching!!
+                      </div>
+                  </div>
+              </div>
+              <div class="input_wrap">
+                  <label>Gender</label>
+                  <ul>
+                      <li>
+                          <label class="radio_wrap">
+                              <input type="radio" name="gender" value="Male" class="input_radio"
+                                  formControlName="gender" required>
+                              <span>Male</span>
+                          </label>
+                      </li>
+                      <li>
+                          <label class="radio_wrap">
+                              <input type="radio" name="gender" value="Female" class="input_radio"
+                                  formControlName="gender">
+                              <span>Female</span>
+                          </label>
+                      </li>
+                  </ul>
+                  <div *ngIf="canCreate && registrationForm.controls.gender.errors">
+                      <div *ngIf="registrationForm.controls.gender.errors?.['required']" class="text-danger">
+                          gender field shouldn't be Empty!
+                      </div>
+                  </div>
+              </div>
+              <div class="input_wrap">
+                  <label for="country">Country</label>
+                  <select style="width: 100%;height: 30px;" type="text" class="input_select" id="country" formControlName="country"
+                      selected="selected" required>
+                      <option>select your country</option>
+                      <option>India</option>
+                      <option>Japan</option>
+                      <option>France</option>
+                      <option>United kingdom</option>
+
+                  </select>
+              </div>
+              <div class="input_wrap">
+                  <label for="message">Message</label>
+                  <textarea style="width: 100%;height: 80px;" [(ngModel)]="textMessage"
+                      (keyup)="displayMessageLength()" type="text" name="message" id="message"
+                      formControlName="message"
+                      [ngClass]="{'is-invalid':canCreate && registrationForm.controls.message.errors}" required></textarea>
+                  <div *ngIf="canCreate && registrationForm.controls.message.errors">
+                    <div *ngIf="registrationForm.controls.message.errors?.['required']" class="text-danger">
+                          message field shouldn't be Empty!
+                      </div>
+                      <div *ngIf="registrationForm.controls.message.errors?.['maxlength']" class="text-danger">
+                          message length is too long !!
+                      </div>
+                  </div>
+                  <div>
+                    <p>{{textLength}} chars are left</p>
+                </div>
+
+              </div>
+              <div *ngIf="(registrationForm.value && registrationForm.valid) && registered" class="alert" style="color: green;">
+                Registered successfully
+              </div>
+              <div class="input_wrap">
+                  <input type="submit" value="Register Now" class="submit_btn" >
+              </div>
+              <div class="input_wrap">
+                  <button type="button" (click)="onCancel()" class="submit_btn">Cancel</button>
+              </div>
+              
+          </div>
+      </form>
+  </div>
+</div>
+<section>
+  <app-display [studentDetails]="studentDetails"></app-display>
+</section>
+ 
+
